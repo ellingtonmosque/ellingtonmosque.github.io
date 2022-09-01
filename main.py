@@ -33,9 +33,7 @@ def format_cell(
         cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 
-def main():
-    month_input, year_input = e1.get(), e2.get()
-
+def main(month_input, year_input):
     ####################################################################################
     # Edit Document
     ####################################################################################
