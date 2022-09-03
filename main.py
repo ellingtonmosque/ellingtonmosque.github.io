@@ -3,15 +3,13 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt
 
 from datetime import datetime, timedelta, date
-from calendar import Calendar, day_name, monthrange
+from calendar import day_name, monthrange
 
-from tkinter import *
-from tkinter.ttk import *
+# from tkinter import *
+# from tkinter.ttk import *
 
 from api import get_prayer_time, get_lunar_date, get_islamic_year
 from constants import LUNAR_MONTHS, GREG_MONTHS
-
-import os
 
 
 def number_of_days_in_month(year=2021, month=2):
@@ -33,7 +31,7 @@ def format_cell(
         cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 
-def main(month_input, year_input):
+def main(month_input: str, year_input: str):
     ####################################################################################
     # Edit Document
     ####################################################################################
@@ -127,42 +125,44 @@ def main(month_input, year_input):
                 iqamah_cell.text = iqamah_time
                 format_cell(iqamah_cell, bold=True)
 
-    if not os.path.exists("calendars"):
-        os.makedirs("calendars")
+    return doc
 
-    doc.save("calendars/" + month_input + "_" + year_input + ".docx")
+    # if not os.path.exists("calendars"):
+    #     os.makedirs("calendars")
+
+    # doc.save("calendars/" + month_input + "_" + year_input + ".docx")
 
 
-if __name__ == "__main__":
-    window = Tk()
-    window.title("Masjid Calendar")
-    window.geometry("400x275")
-    window.eval("tk::PlaceWindow . center")
+# if __name__ == "__main__":
+#     window = Tk()
+#     window.title("Masjid Calendar")
+#     window.geometry("400x275")
+#     window.eval("tk::PlaceWindow . center")
 
-    lbl1 = Label(window, text="Month")
+#     lbl1 = Label(window, text="Month")
 
-    current_month = int(datetime.now().strftime("%m"))
-    current_year = int(datetime.today().year)
+#     current_month = int(datetime.now().strftime("%m"))
+#     current_year = int(datetime.today().year)
 
-    e1 = Combobox(window, width=15)
-    e1["values"] = list(GREG_MONTHS.keys())
-    e1.current(current_month - 1)
-    e1.grid(row=0, column=1)
+#     e1 = Combobox(window, width=15)
+#     e1["values"] = list(GREG_MONTHS.keys())
+#     e1.current(current_month - 1)
+#     e1.grid(row=0, column=1)
 
-    lbl1.place(x=80, y=50)
-    e1.place(x=180, y=50)
+#     lbl1.place(x=80, y=50)
+#     e1.place(x=180, y=50)
 
-    lbl2 = Label(window, text="Year")
+#     lbl2 = Label(window, text="Year")
 
-    dflt = IntVar()
-    dflt.set(current_year)
+#     dflt = IntVar()
+#     dflt.set(current_year)
 
-    e2 = Spinbox(window, from_=2020, to=2121, width=15, textvariable=dflt)
+#     e2 = Spinbox(window, from_=2020, to=2121, width=15, textvariable=dflt)
 
-    lbl2.place(x=80, y=100)
-    e2.place(x=180, y=100)
+#     lbl2.place(x=80, y=100)
+#     e2.place(x=180, y=100)
 
-    b1 = Button(window, text="Submit", command=main, width=34)
-    b1.place(x=80, y=150)
+#     b1 = Button(window, text="Submit", command=main, width=34)
+#     b1.place(x=80, y=150)
 
-    window.mainloop()
+#     window.mainloop()
